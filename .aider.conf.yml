@@ -1,0 +1,4 @@
+# 
+read:
+  - ~/.aider.conventions.md   # ホーム（共通）
+  - .aider.conventions.md     # プロジェクト（固有）

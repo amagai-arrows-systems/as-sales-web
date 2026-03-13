@@ -1,0 +1,27 @@
+# This is an example configuration file
+# To learn more, see the full config.yaml reference: https://docs.continue.dev/reference
+
+name: WSL2 Config
+version: 1.0.0
+schema: v1
+
+# Define which models can be used
+# https://docs.continue.dev/customization/models
+models:
+  - name: Lfm2.5:1.2b
+    provider: lmstudio
+    model: liquid/lfm2.5-1.2b
+    apiBase: http://localhost:1234/v1/
+  - name: Qwen2.5-Coder:3B
+    provider: lmstudio
+    model: qwen2.5-coder-3b-instruct
+    apiBase: http://localhost:1234/v1/
+  - name: Gemma3:4B
+    provider: lmstudio
+    model: gemma-3-4b-it
+    apiBase: http://localhost:1234/v1/
+
+# MCP Servers that Continue can access
+# https://docs.continue.dev/customization/mcp-tools
+# mcpServers:
+#   - uses: anthropic/memory-mcp

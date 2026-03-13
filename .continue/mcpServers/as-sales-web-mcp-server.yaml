@@ -1,0 +1,16 @@
+name: AS-SALES-WEB MCP server
+version: 0.0.1
+schema: v1
+  
+mcpServers:
+  - name: serena_as_sales_web
+    command: docker
+    args:
+      - exec
+      - -i
+      - serena_mcp
+      - /bin/sh
+      - -c
+      - |
+        serena start-mcp-server --transport stdio --project /workspaces/pdev/apps/sales_support/as-sales-web
+
