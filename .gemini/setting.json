@@ -1,0 +1,20 @@
+{
+  "mcpServers": {
+    "serena": {
+      "command": "docker",
+      "args": [
+        "exec",
+        "-i",
+        "serena_mcp",
+        "serena",
+        "start-mcp-server",
+        "--transport",
+        "stdio",
+        "--context",
+        "ide-assistant",
+        "--project",
+        "/workspaces/pdev/apps/sales_support/as-sales-web"
+      ]
+    }
+  }
+}

@@ -12,5 +12,5 @@ mcpServers:
       - /bin/sh
       - -c
       - |
-        serena start-mcp-server --transport stdio --project /workspaces/pdev/apps/sales_support/as-sales-web
+        serena start-mcp-server --transport stdio --context ide-assistant --project /workspaces/pdev/apps/sales_support/as-sales-web
 
