@@ -48,6 +48,10 @@ next-env.d.ts
 .aider*
 *as-sales-web-mcp-server.yaml.*
 
+# Backup files
+*.bk*
+*_bk*
+
 # Exclude file-list
 !.aider.conventions.md
 !.aider.conf.yml

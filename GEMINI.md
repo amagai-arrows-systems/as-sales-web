@@ -1,38 +1,26 @@
-# プロジェクト概要
-- **技術スタック**: Next.js (App Router), TypeScript, Tailwind CSS
-- **パッケージマネージャー**: pnpm (または npm/yarn)
-- **目的**: [ここにプロジェクトの目的を簡潔に記入]
+# ディレクトリ構成
 
-# コーディング規約 (TypeScript/Next.js)
-- **コンポーネント設計**:
-  - 原則として Server Components を優先し、インタラクションが必要な場合のみ 'use client' を使用する。
-  - 関数コンポーネントは `export function Name() {}` 形式を推奨（アロー関数より優先）。
-- **型定義**:
-  - `any` の使用を禁止。`interface` より `type` を優先する。
-  - Zod などによる実行時バリデーションを推奨。
-- **ディレクトリ構造**:
-  - `src/app` (ルーティング), `src/components` (UIパーツ), `src/lib` (共通関数), `src/hooks` (カスタムフック)。
-- **ルーティング**:
-  - Next.js App Router の規約（layout.tsx, page.tsx, error.tsx など）を厳守。
+```
+./
+├ README.md
+├ GEMINI.md
+└ ./gemini
+      └ gemini-guides
+        └ PLAN_GUIDE.md
+        └ GIT_GUIDE.md
+        └ TESTING_GUIDE.md
+        └ DOC_GUIDE.md
+```
 
-# ルールと制約
-- **パフォーマンス**:
-  - `next/image` や `next/font` を適切に使用し、LCPを最適化する。
-- **UI/UX**:
-  - デザイントークンとして Tailwind CSS のユーティリティクラスのみを使用する。
-- **テスト**:
-  - ロジックには Vitest、E2E には Playwright を想定（必要に応じて変更）。
+# ルール
+ 
+- ルールを遵守すること。
+- 日本語で会話すること。
+- README.md に記載されている背景情報を読み込むこと。
+- 計画を立てる際には `.gemini/gemini-guides/PLAN_GUIDE.md` の情報を読み込みルールに沿って計画を立てること。これは重要なルールです。
+- `.gemini/gemini-guides/` 配下のルールは全て読み込むこと。
+  - GIT_GUIDE.md
+  - DOC_GUIDE.md
+  - TESTING_GUIDE.md
+  - COMPONENT_GUIDE.md
 
-# アクション方針
-- コードを生成する前に、まず実装の「設計プラン」を提示する。
-- 破壊的な変更や大規模なリファクタリングを行う際は、必ず事前に確認を求める。
-
-# MCP (serena) 利用方針
-- **自律的リサーチ**:
-  - 不明なディレクトリ構造やファイル内容がある場合は、`ls` や `cat` (read_file) を使用して自ら確認してください。
-- **ドキュメント参照**:
-  - プロジェクト内の既存ドキュメントやREADMEを積極的に読み取り、コンテキストを補完してください。
-- **ファイル操作**:
-  - コードの修正や新規作成が必要な場合は、提案だけでなく、適切なMCPツールを使用してファイルを直接更新してください。
-- **逐次実行**:
-  - 大規模な変更を行う際は、一度に全て書き換えず、小さな単位でファイルを更新し、その都度進捗を報告してください。

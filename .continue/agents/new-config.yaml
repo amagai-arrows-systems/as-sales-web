@@ -14,7 +14,7 @@ models:
     apiBase: http://localhost:1234/v1/
   - name: Qwen2.5-Coder:3B
     provider: lmstudio
-    model: qwen2.5-coder-3b-instruct
+    model: qwen2.5-coder-3b-instruct@q4_k_m
     apiBase: http://localhost:1234/v1/
   - name: Gemma3:4B
     provider: lmstudio
