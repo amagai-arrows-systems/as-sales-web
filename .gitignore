@@ -47,6 +47,10 @@ next-env.d.ts
 /.github
 .aider*
 *as-sales-web-mcp-server.yaml.*
+/.gemini/specs
+/.gemini/setting.json
+/.instructions
+/test-results/*
 
 # Backup files
 *.bk*
@@ -56,3 +60,5 @@ next-env.d.ts
 !.aider.conventions.md
 !.aider.conf.yml
 !.serena/project.yml
+*storybook.log
+storybook-static
