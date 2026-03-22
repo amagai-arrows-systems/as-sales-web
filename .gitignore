@@ -9,6 +9,7 @@
 !.yarn/plugins
 !.yarn/releases
 !.yarn/versions
+pnpm-lock.yaml
 
 # testing
 /coverage
@@ -29,6 +30,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+storybook-debug.log*
+storybook_log.txt
 
 # env files (can opt-in for committing if needed)
 .env*
@@ -51,6 +54,7 @@ next-env.d.ts
 /.gemini/setting.json
 /.instructions
 /test-results/*
+/tmp/*
 
 # Backup files
 *.bk*

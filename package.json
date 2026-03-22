@@ -14,44 +14,55 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "next": "16.1.6",
-    "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "next": "14.2.3",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.58.2",
-    "@storybook/addon-essentials": "^8.6.14",
-    "@storybook/addon-interactions": "^8.6.14",
-    "@storybook/addon-links": "^10.2.19",
-    "@storybook/addon-onboarding": "^10.2.19",
-    "@storybook/blocks": "^8.6.14",
-    "@storybook/react": "^10.2.19",
-    "@storybook/react-vite": "^10.2.19",
-    "@storybook/testing-library": "^0.2.2",
-    "@tailwindcss/postcss": "^4",
+    "@storybook/addon-a11y": "^10.3.1",
+    "@storybook/addon-docs": "^10.3.1",
+    "@storybook/addon-links": "^10.3.1",
+    "@storybook/addon-onboarding": "^10.3.1",
+    "@storybook/addon-vitest": "^10.3.1",
+    "@storybook/nextjs-vite": "^10",
+    "@storybook/react": "^10.3.1",
+    "@storybook/test": "8.6.18",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@types/jest": "^30.0.0",
     "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@vitest/browser-playwright": "^4.1.0",
+    "@vitest/coverage-v8": "^4.1.0",
+    "autoprefixer": "^10.4.19",
     "eslint": "^9",
-    "eslint-config-next": "16.1.6",
+    "eslint-config-next": "14.2.3",
+    "eslint-plugin-storybook": "^10.3.1",
+    "html-webpack-plugin": "^5.6.6",
     "jest": "^30.3.0",
     "jest-environment-jsdom": "^30.3.0",
-    "storybook": "^10.2.19",
-    "tailwindcss": "^4",
-    "typescript": "^5",
-    "@storybook/nextjs-vite": "^10.2.19",
-    "@chromatic-com/storybook": "^5.0.1",
-    "@storybook/addon-vitest": "^10.2.19",
-    "@storybook/addon-a11y": "^10.2.19",
-    "@storybook/addon-docs": "^10.2.19",
-    "vite": "^8.0.0",
-    "eslint-plugin-storybook": "^10.2.19",
-    "vitest": "^4.1.0",
     "playwright": "^1.58.2",
-    "@vitest/browser-playwright": "^4.1.0",
-    "@vitest/coverage-v8": "^4.1.0"
+    "postcss": "^8.4.38",
+    "storybook": "^10.3.1",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5",
+    "vite": "^8.0.0",
+    "vitest": "^4.1.0",
+    "webpack": "^5.105.4",
+    "webpack-dev-middleware": "^6.1.3"
+  },
+  "pnpm": {
+    "overrides": {
+      "webpack": "^5.91.0",
+      "html-webpack-plugin": "^5.6.0",
+      "tapable": "^2.2.1"
+    },
+    "public-hoist-pattern": [
+      "*webpack*",
+      "html-webpack-plugin",
+      "tapable"
+    ]
   }
 }

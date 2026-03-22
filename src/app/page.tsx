@@ -1,65 +1,102 @@
-import Image from "next/image";
+'use client';
+
+import { useMemo, useState } from 'react';
+import { useEngineerData } from '../hooks/useEngineerData';
+import { EngineerTable } from '../components/EngineerTable';
+import type { EngineerInfo } from '../types/engineer';
+
+type SortDirection = 'ascending' | 'descending';
+
+interface SortConfig {
+  key: keyof EngineerInfo | null;
+  direction: SortDirection;
+}
+
 
 export default function Home() {
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+  const { data, loading, error } = useEngineerData();
+  const [searchTerm, setSearchTerm] = useState('');
+  const [sortConfig, setSortConfig] = useState<SortConfig>({ key: 'id', direction: 'ascending' });
+
+  const filteredData = useMemo(() => {
+    if (!data) return [];
+    return data.filter(engineer =>
+      engineer.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      engineer.client.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      engineer.site.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [data, searchTerm]);
+
+  const sortedData = useMemo(() => {
+    let sortableItems = [...filteredData];
+    if (sortConfig.key !== null) {
+      sortableItems.sort((a, b) => {
+        const aValue = a[sortConfig.key!];
+        const bValue = b[sortConfig.key!];
+
+        if (aValue < bValue) {
+          return sortConfig.direction === 'ascending' ? -1 : 1;
+        }
+        if (aValue > bValue) {
+          return sortConfig.direction === 'ascending' ? 1 : -1;
+        }
+        return 0;
+      });
+    }
+    return sortableItems;
+  }, [filteredData, sortConfig]);
+
+  const handleSort = (key: keyof EngineerInfo) => {
+    let direction: SortDirection = 'ascending';
+    if (sortConfig.key === key && sortConfig.direction === 'ascending') {
+      direction = 'descending';
+    }
+    setSortConfig({ key, direction });
+  };
+
+
+  if (error) return (
+    <div className="flex items-center justify-center min-h-screen bg-gray-50">
+      <div className="p-4 bg-red-50 text-red-700 border border-red-200 rounded-lg">
+        <h2 className="font-bold mb-1">エラーが発生しました</h2>
+        <p>{error.message}</p>
+      </div>
     </div>
+  );
+
+  return (
+    <main className="min-h-screen bg-gray-50 p-4 md:p-8">
+      <div className="max-w-[1600px] mx-auto">
+        <header className="mb-8">
+          <h1 className="text-2xl font-bold text-gray-900">就業状況管理一覧</h1>
+          <p className="text-sm text-gray-500 mt-1">
+            所属エンジニアの稼働状況および契約条件を管理します。
+          </p>
+        </header>
+
+        <div className="mb-4">
+          <input
+            type="text"
+            placeholder="氏名、契約先、常駐先で検索..."
+            className="w-full md:w-1/3 p-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+
+        <section className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+          <EngineerTable 
+            data={sortedData} 
+            isLoading={loading}
+            sortConfig={sortConfig}
+            onSort={handleSort}
+          />
+        </section>
+
+        <footer className="mt-6 text-sm text-gray-400 text-center">
+          &copy; 2026 就業状況管理システム
+        </footer>
+      </div>
+    </main>
   );
 }
