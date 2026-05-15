@@ -4,9 +4,17 @@ schema: v1
 
 models:
   # --- Chat / Edit 用 ---
-  - name: qwen2.5-coder:7b
+  - name: qwen2.5-coder:7b-q5_K_M
     provider: ollama
     model: qwen2.5-coder:7b-instruct-q5_K_M
+    roles:
+      - chat
+      - edit
+      - apply
+
+  - name: qwen2.5-coder:7b
+    provider: ollama
+    model: qwen2.5-coder:7b
     roles:
       - chat
       - edit
