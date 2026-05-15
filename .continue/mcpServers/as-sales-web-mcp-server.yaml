@@ -4,13 +4,42 @@ schema: v1
   
 mcpServers:
   - name: serena_as_sales_web
-    command: docker
+    command: wsl
     args:
+      - -d
+      - Ubuntu-24.04
+      - --
+      - docker
       - exec
       - -i
       - serena_mcp
-      - /bin/sh
-      - -c
-      - |
-        serena start-mcp-server --transport stdio --context ide-assistant --project /workspaces/pdev/apps/sales_support/as-sales-web
+      - serena
+      - start-mcp-server
+      - --transport
+      - stdio
+      - --context
+      - ide-assistant
+      - --project
+      - /workspaces/pdev/apps/as-sales-web
+    # command: docker
+    # args:
+    #   - exec
+    #   - -i
+    #   - serena_mcp
+    #   - serena
+    #   - start-mcp-server
+    #   - --transport
+    #   - stdio
+    #   - --context
+    #   - ide-assistant
+    #   - --project
+    #   - /workspaces/pdev/apps/as-sales-web
+    # args:
+    #   - exec
+    #   - -i
+    #   - serena_mcp
+    #   # - /bin/sh
+    #   # - -c
+    #   - |
+    #     serena start-mcp-server --transport stdio --context ide-assistant --project /workspaces/pdev/apps/as-sales-web
 

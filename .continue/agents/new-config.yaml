@@ -1,26 +1,67 @@
-# This is an example configuration file
-# To learn more, see the full config.yaml reference: https://docs.continue.dev/reference
-
 name: WSL2 Config
 version: 1.0.0
 schema: v1
 
-# Define which models can be used
-# https://docs.continue.dev/customization/models
 models:
-  - name: Lfm2.5:1.2b
-    provider: lmstudio
-    model: liquid/lfm2.5-1.2b
-    apiBase: http://localhost:1234/v1/
-  - name: Qwen2.5-Coder:3B
-    provider: lmstudio
-    model: qwen2.5-coder-3b-instruct@q4_k_m
-    apiBase: http://localhost:1234/v1/
-  - name: Gemma3:4B
-    provider: lmstudio
-    model: gemma-3-4b-it
-    apiBase: http://localhost:1234/v1/
+  # --- Chat / Edit 用 ---
+  - name: qwen2.5-coder:7b
+    provider: ollama
+    model: qwen2.5-coder:7b-instruct-q5_K_M
+    roles:
+      - chat
+      - edit
+      - apply
 
+  - name: gemma3
+    provider: ollama
+    model: gemma3:4b
+    roles:
+      - chat
+      - edit
+      - apply
+
+  - name: gpt-oss:120b-cloud
+    provider: ollama
+    model: gpt-oss:120b-cloud
+    roles:
+      - chat
+
+  # --- Embed 用 ---
+  - name: nomic-embed-text-v2
+    provider: ollama
+    model: nomic-embed-text-v2-moe:latest
+    roles:
+      - embed
+
+  # --- Autocomplete 専用設定 ---
+  - name: qwen2.5-coder-auto for Autocomplete
+    provider: ollama
+    model: qwen2.5-coder:1.5b-base-q8_0
+    roles:
+      - autocomplete
+    autocompleteOptions:
+      disable: false
+      maxPromptTokens: 1024
+      debounceDelay: 250
+      modelTimeout: 150
+      maxSuffixPercentage: 0.2
+      prefixPercentage: 0.3
+      onlyMyCode: true
+
+rules:
+  - Always give concise responses
+  - Always output in Japanese
+
+contextProviders:
+  - name: code
+  - name: docs
+  - name: diff
+  - name: terminal
+  - name: codebase        # 埋め込みモデルを活用するために必須
+
+system_prompt: |
+  あなたは優秀なエンジニアです。
+  ユーザーとの対話、コードの解説、ドキュメントの生成はすべて日本語で行ってください。
 # MCP Servers that Continue can access
 # https://docs.continue.dev/customization/mcp-tools
 # mcpServers:
