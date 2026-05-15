@@ -47,7 +47,6 @@ next-env.d.ts
 # /.continue
 /.serena
 /.vscode
-/.github
 .aider*
 *as-sales-web-mcp-server.yaml.*
 /.gemini/specs
